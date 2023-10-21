@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DoAnLythuyetdothi;
 using DoAnLythuyetdothi.Cau_3;
+using DoAnLythuyetdothi.Cau_5;
 using DoAnLythuyetdothi.Cau1;
 using DoAnLythuyetdothi.Cau2;
 using DoAnLythuyetdothi.Entities;
@@ -141,4 +142,50 @@ try
 catch (Exception ex)
 {
     Console.WriteLine("An error occurred: " + ex.Message);
+}
+//Cau 5
+string fileName = "D:\\File C#\\fileLyThuyetdothiCau5.txt"; // Tên tệp văn bản chứa danh sách kề
+
+try
+{
+	string[] lines = File.ReadAllLines(fileName);
+	int V = lines.Length;
+	Graph graph = new Graph(V);
+    Euler euler = new Euler();
+
+	for (int i = 0; i < V; i++)
+	{
+		int[] neighbors = lines[i].Split(' ').Select(int.Parse).ToArray(); ;
+		foreach (int neighbor in neighbors)
+		{
+			graph.AddEdge(i, neighbor);
+		}
+	}
+	if (euler.IsSimpleGraph(graph))
+	{
+		Console.WriteLine("Đồ thị là đơn đồ thị.");
+	}
+	else
+	{
+		Console.WriteLine("Đồ thị không phải là đơn đồ thị.");
+	}
+
+	if (euler.IsEulerian(graph))
+	{
+		Console.WriteLine("Đồ thị là Eulerian.");
+		euler.FindEulerianPathCycle(graph);
+	}
+	else if (euler.IsSemiEulerian(graph))
+	{
+		Console.WriteLine("Đồ thị là nửa Euler.");
+		euler.FindEulerianPathCycle(graph);
+	}
+	else
+	{
+		Console.WriteLine("Đồ thị không phải Eulerian hoặc nửa Euler.");
+	}
+}
+catch (Exception e)
+{
+	Console.WriteLine("Lỗi: " + e.Message);
 }

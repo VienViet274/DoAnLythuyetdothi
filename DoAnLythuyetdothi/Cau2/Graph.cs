@@ -22,7 +22,8 @@ namespace DoAnLythuyetdothi.Cau2
         public void AddEdge(int v, int w)
         {
             adjacencyList[v].Add(w);
-        }
+            adjacencyList[w].Add(v);
+		}
 
         
     }
