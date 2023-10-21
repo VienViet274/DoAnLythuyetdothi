@@ -122,32 +122,45 @@ catch (Exception ex)
     Console.WriteLine("An error occurred: " + ex.Message);
 }
 
-try
-{
+//try
+//{
     // Read the adjacency matrix from the input file
-    string[] lines = File.ReadAllLines(filePath);
-    DoThi g = new DoThi();
-    g.TaoMaTranKe(@"..\..\..\input.txt");
-    g.XuatMaTranKe();
-    int[][] graph = new int[Convert.ToInt32(lines[0])][];
-    for (int i = 0; i < Convert.ToInt32(lines[0]); i++)
+    string[] liness = File.ReadAllLines(filePath);
+    DoThi gs = new DoThi();
+    gs.TaoMaTranKe(@"..\..\..\input.txt");
+    gs.XuatMaTranKe();
+    int[][] graphs = new int[Convert.ToInt32(liness[0])][];
+    for (int i = 1; i <= Convert.ToInt32(liness[0]); i++)
     {
-        string[] values = lines[i].Split(' ');
-        graph[i] = new int[values.Length];
-        for (int j = 0; j < values.Length; j++)
+        string[] values = liness[i].Split(' ');
+        graphs[i-1] = new int[Convert.ToInt32(liness[0])];
+    for(int m = 0; m < graphs[i-1].Length; m++)
+    {
+        graphs[i - 1][m] = 0;
+    }
+      for (int j = 0; j < values.Length; j++)
         {
-            graph[i][j] = int.Parse(values[j]);
+            bool flag = false;
+            if (j % 2 != 0 && j <= graphs[i-1].Length)
+            {
+                graphs[i - 1][Convert.ToInt32(values[j])] = int.Parse(values[j+1]);
+                flag = true;
+            }
+            
         }
+        
+
+    
     }
 
     // Create PrimMST object and run the Prim's MST algorithm
-    PrimAlgorithm primMST = new PrimAlgorithm(graph);
+    PrimAlgorithm primMST = new PrimAlgorithm(graphs);
     primMST.PrimMSTAlgorithm();
-}
-catch (Exception ex)
-{
-    Console.WriteLine("An error occurred: " + ex.Message);
-}
+//}
+//catch (Exception ex)
+//{
+    //Console.WriteLine("An error occurred: " + ex.Message);
+//}
 try
 {
     // Read the adjacency matrix from the input file
