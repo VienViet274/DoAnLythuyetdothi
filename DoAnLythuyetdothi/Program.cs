@@ -129,84 +129,75 @@ catch (Exception ex)
     DoThi gs = new DoThi();
     gs.TaoMaTranKe(@"..\..\..\input.txt");
     gs.XuatMaTranKe();
-    int[][] graphs = new int[Convert.ToInt32(liness[0])][];
-    for (int i = 1; i <= Convert.ToInt32(liness[0]); i++)
-    {
-        string[] values = liness[i].Split(' ');
-        graphs[i-1] = new int[Convert.ToInt32(liness[0])];
-    for(int m = 0; m < graphs[i-1].Length; m++)
-    {
-        graphs[i - 1][m] = 0;
-    }
-      for (int j = 0; j < values.Length; j++)
-        {
-            bool flag = false;
-            if (j % 2 != 0 && j <= graphs[i-1].Length)
-            {
-                graphs[i - 1][Convert.ToInt32(values[j])] = int.Parse(values[j+1]);
-                flag = true;
-            }
+gs.Prim();
+gs.Kruskal1();
+    //int[][] graphs = new int[Convert.ToInt32(liness[0])][];
+    //for (int i = 1; i <= Convert.ToInt32(liness[0]); i++)
+    //{
+    //    string[] values = liness[i].Split(' ');
+    //    graphs[i-1] = new int[Convert.ToInt32(liness[0])];
+    //for(int m = 0; m < graphs[i-1].Length; m++)
+    //{
+    //    graphs[i - 1][m] = 0;
+    //}
+    //  for (int j = 0; j < values.Length; j++)
+    //    {
+    //        bool flag = false;
+    //        if (j % 2 != 0 && j <= graphs[i-1].Length)
+    //        {
+    //            graphs[i - 1][Convert.ToInt32(values[j])] = int.Parse(values[j+1]);
+    //            flag = true;
+    //        }
             
-        }
+    //    }
         
 
     
-    }
+    //}
 
-    // Create PrimMST object and run the Prim's MST algorithm
-    PrimAlgorithm primMST = new PrimAlgorithm(graphs);
-    primMST.PrimMSTAlgorithm();
+    //// Create PrimMST object and run the Prim's MST algorithm
+    //PrimAlgorithm primMST = new PrimAlgorithm(graphs);
+    //primMST.PrimMSTAlgorithm();
 //}
 //catch (Exception ex)
 //{
     //Console.WriteLine("An error occurred: " + ex.Message);
 //}
-try
-{
-    // Read the adjacency matrix from the input file
-    string[] lines = File.ReadAllLines(filePath);
-    int[][] graph = new int[lines.Length][];
-    for (int i = 0; i < lines.Length; i++)
-    {
-        string[] values = lines[i].Split(' ');
-        graph[i] = new int[values.Length];
-        for (int j = 0; j < values.Length; j++)
-        {
-            graph[i][j] = int.Parse(values[j]);
-        }
-    }
+//try
+//{
+//    // Read the adjacency matrix from the input file
+//    string[] lines = File.ReadAllLines(filePath);
+//    int[][] graph = new int[lines.Length][];
+//    for (int i = 0; i < lines.Length; i++)
+//    {
+//        string[] values = lines[i].Split(' ');
+//        graph[i] = new int[values.Length];
+//        for (int j = 0; j < values.Length; j++)
+//        {
+//            graph[i][j] = int.Parse(values[j]);
+//        }
+//    }
 
-    KruskalAlgorithm kruskalMST = new KruskalAlgorithm(graph);
-    kruskalMST.KruskalMSTAlgorithm();
-}
-catch (Exception ex)
-{
-    Console.WriteLine("An error occurred: " + ex.Message);
-}
+//    KruskalAlgorithm kruskalMST = new KruskalAlgorithm(graph);
+//    kruskalMST.KruskalMSTAlgorithm();
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine("An error occurred: " + ex.Message);
+//}
 // Cau 4
 try
 {
     DoThi g = new DoThi();
     g.TaoMaTranKe(@"..\..\..\input.txt");
     g.XuatMaTranKe();
-    g.DuongDiNganNhatDijkstra(0, 3);
-
-
-
-
-    //LIEM--------------------
-    //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-    //Console.WriteLine(sCurrentDirectory);
-
-    //string filename = @"..\..\..\input.txt";
-    //if (!File.Exists(filename))
-    //{
-    //    Console.WriteLine("This file does not exist.");
-    //}
-    //else
-    //{
-    //    Console.WriteLine("This file exists.");
-    //}
+    Console.WriteLine("----------------------");
+    //Câu 4:
+    Console.Write($"Do thi co trong so duong: {g.DoThiCoTrongSoDuong()}\n");
+    Console.WriteLine("----------------------");
+    g.DuongDiNganNhatDijkstraToiTatCaCacDinh(0);
+    Console.WriteLine("----------------------");
+    g.DuongDiNganNhatBellmanToiTatCaCacDinh(0);
 }
 catch (Exception ex)
 {
