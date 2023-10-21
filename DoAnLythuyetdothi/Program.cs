@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DoAnLythuyetdothi;
 using DoAnLythuyetdothi.Cau_3;
+using DoAnLythuyetdothi.Cau_4;
 using DoAnLythuyetdothi.Cau_5;
 using DoAnLythuyetdothi.Cau1;
 using DoAnLythuyetdothi.Cau2;
@@ -29,25 +30,38 @@ catch(Exception ex)
 //Cau 2
 try
 {
-    string[] lines = File.ReadAllLines("D:\\File C#\\fileLyThuyetdothiCau2.txt");
-    int vertices = lines.Length;
+    string[] lines = File.ReadAllLines(@"..\..\..\input.txt");
+    int vertices = Convert.ToInt32(lines[0]);
     Graph graph = new Graph(vertices);
 
-    for (int i = 0; i < vertices; i++)
+    for (int i = 1; i < vertices; i++)
     {
         string[] parts = lines[i].Split(' ');
-        int vertex = int.Parse(parts[0].Trim());
-        int neighbor = int.Parse(parts[1].Trim());
-        graph.AddEdge(vertex, neighbor);
+        int vertex = i - 1;
+        if (Convert.ToInt32(parts[0]) != 0)
+        {
+            for(int  j=0;j< parts.Length;j++)
+            {
+                if (j % 2 != 0)
+                {
+                    int neighbor = int.Parse(parts[j].Trim());
+                    graph.AddEdge(vertex, neighbor);
+                }
+                
+            }
+            
+        }
+        
+        
         
     }
     DepthFirstSearch dfs = new DepthFirstSearch();
     Console.WriteLine("Recursive Depth-First Search:");
-    dfs.DFS(graph, 7);
+    dfs.DFS(graph, 0);
     Console.WriteLine();
     BreathFirstSearch bfs = new BreathFirstSearch();
     Console.WriteLine("BFS Traversal:");
-    bfs.BFS(graph, 7);
+    bfs.BFS(graph, 0);
     Console.WriteLine();
     ConnectedComponents ConnectedComponents = new ConnectedComponents();
     bool isUndirected = ConnectedComponents.IsUndirectedGraph(graph);
@@ -70,24 +84,34 @@ catch(Exception ex)
     Console.WriteLine("An error occurred: "+ ex.Message);
 }
 //Cau 3
-string filePath = "D:\\File C#\\fileLyThuyetdothiCau3.txt";
+string filePath = @"..\..\..\input.txt";
 try
 {
     // Read the adjacency matrix from the input file
     string[] lines = File.ReadAllLines(filePath);
-    int vertices = lines.Length;
-
+    int vertices = Convert.ToInt32(lines[0]);
     Graph graph = new Graph(vertices);
 
-    for (int i = 0; i < vertices; i++)
+    for (int i = 1; i < vertices; i++)
     {
-        string[] values = lines[i].Split(' ');
-        for (int j = 0; j < vertices; j++)
+        string[] parts = lines[i].Split(' ');
+        int vertex = i - 1;
+        if (Convert.ToInt32(parts[0]) != 0)
         {
-            int weight = int.Parse(values[j]);
-            if (weight != 0)
-                graph.AddEdge(i, j);
+            for (int j = 0; j < parts.Length; j++)
+            {
+                if (j % 2 != 0)
+                {
+                    int neighbor = int.Parse(parts[j].Trim());
+                    graph.AddEdge(vertex, neighbor);
+                }
+
+            }
+
         }
+
+
+
     }
     ConnectedComponents connectedComponents= new ConnectedComponents();
     bool isConnected =connectedComponents.IsUndirectedGraph(graph) ;
@@ -102,8 +126,11 @@ try
 {
     // Read the adjacency matrix from the input file
     string[] lines = File.ReadAllLines(filePath);
-    int[][] graph = new int[lines.Length][];
-    for (int i = 0; i < lines.Length; i++)
+    DoThi g = new DoThi();
+    g.TaoMaTranKe(@"..\..\..\input.txt");
+    g.XuatMaTranKe();
+    int[][] graph = new int[Convert.ToInt32(lines[0])][];
+    for (int i = 0; i < Convert.ToInt32(lines[0]); i++)
     {
         string[] values = lines[i].Split(' ');
         graph[i] = new int[values.Length];
@@ -142,6 +169,35 @@ try
 catch (Exception ex)
 {
     Console.WriteLine("An error occurred: " + ex.Message);
+}
+// Cau 4
+try
+{
+    DoThi g = new DoThi();
+    g.TaoMaTranKe(@"..\..\..\input.txt");
+    g.XuatMaTranKe();
+    g.DuongDiNganNhatDijkstra(0, 3);
+
+
+
+
+    //LIEM--------------------
+    //string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+    //Console.WriteLine(sCurrentDirectory);
+
+    //string filename = @"..\..\..\input.txt";
+    //if (!File.Exists(filename))
+    //{
+    //    Console.WriteLine("This file does not exist.");
+    //}
+    //else
+    //{
+    //    Console.WriteLine("This file exists.");
+    //}
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
 }
 //Cau 5
 string fileName = "D:\\File C#\\fileLyThuyetdothiCau5.txt"; // Tên tệp văn bản chứa danh sách kề
