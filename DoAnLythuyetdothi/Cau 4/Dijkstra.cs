@@ -1,4 +1,5 @@
 ﻿using DoAnLythuyetdothi.Cau_3;
+using DoAnLythuyetdothi.Cau2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -447,7 +448,7 @@ namespace DoAnLythuyetdothi.Cau_4
                 Console.WriteLine($"{e.DinhDau}---{e.DinhCuoi}: {e.DoDai}");
             }
         }
-		public bool ChuaTaoChuTrinh(List<Et> result, Et DinhMoiThem)
+		private bool ChuaTaoChuTrinh(List<Et> result, Et DinhMoiThem)
         {
             if (result.Count == 0)
             {
@@ -478,6 +479,23 @@ namespace DoAnLythuyetdothi.Cau_4
                 
             }
             return ketqua;
+        }
+        
+        public void DFS()
+        {
+            List<TapHopDiem> tapHopDiems= new List<TapHopDiem>();
+            for(int i = 0; i < data.GetLength(0); i++)
+            {
+                for(int j=0;j<data.GetLength(1); j++)
+                {
+                    if (CoCanhNoi(i, j))
+                    {
+                        tapHopDiems.Add(new TapHopDiem { DinhDau=i,DinhCuoi=j,DanhDau=false,DoDai=0});
+                    }
+                }
+            }
+            return;
+
         }
 
     }

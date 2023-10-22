@@ -131,6 +131,7 @@ catch (Exception ex)
     gs.XuatMaTranKe();
 gs.Prim();
 gs.Kruskal1();
+gs.DFS();
     //int[][] graphs = new int[Convert.ToInt32(liness[0])][];
     //for (int i = 1; i <= Convert.ToInt32(liness[0]); i++)
     //{
